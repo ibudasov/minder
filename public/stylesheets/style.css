@@ -1,0 +1,8 @@
+.container {
+  width: 640px;
+}
+span.label.label-margin {
+  margin: 5px;
+  dislpay: inline;
+  float: left;
+}
