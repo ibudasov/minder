@@ -3,10 +3,15 @@ var router = express.Router();
 var thoughtController = require('../controllers/ThoughtController.js');
 var frontendController = require('../controllers/FrontendController.js');
 
-/* GET home page. */
-router.get('/',                 frontendController.main);
+/* Frontend routes */
+router.get('/', frontendController.main);
+router.get('/add', frontendController.add);
+router.get('/stats', frontendController.stats);
+router.get('/cloud', frontendController.cloud);
+router.get('/calendar', frontendController.calendar);
 
-router.post('/thought',         thoughtController.api.add);
-router.get('/thought',          thoughtController.api.get);
+/* API routes */
+router.post('/thought', thoughtController.api.add);
+router.get('/thought', thoughtController.api.get);
 
 module.exports = router;

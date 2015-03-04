@@ -2,6 +2,40 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='javascript', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
   body
-    block content
+    nav.navbar.navbar-fixed-top
+      div.container
+        div.navbar-header
+          button.navbar-toggle.collapsed&attributes({'type': 'button', 'data-toggle':'collapse', 'data-target':'#navbar', 'aria-expanded':'false', 'aria-control':'navbar'})
+            span.sr-only okok
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a(class='navbar-brand', href='/') Minder
+        div#navbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='add')
+                span.glyphicon.glyphicon-plus&attributes({'aria-hidden':'true'})
+            li
+              a(href='stats')
+                span.glyphicon.glyphicon-stats&attributes({'aria-hidden':'true'})
+            li
+              a(href='cloud')
+                span.glyphicon.glyphicon-cloud&attributes({'aria-hidden':'true'})
+            li
+              a(href='calendar')
+                span.glyphicon.glyphicon-calendar&attributes({'aria-hidden': 'true'})
+
+    div.container
+      div.starter-template
+        br
+        br
+        br
+        block content
+
+
+
