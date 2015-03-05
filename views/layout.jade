@@ -2,6 +2,7 @@ doctype html
 html
   head
     title= title
+    meta&attributes({'name':'viewport', 'content':'width=640, initial-scale=1'})
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='javascript', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
@@ -10,7 +11,7 @@ html
       div.container
         div.navbar-header
           button.navbar-toggle.collapsed&attributes({'type': 'button', 'data-toggle':'collapse', 'data-target':'#navbar', 'aria-expanded':'false', 'aria-control':'navbar'})
-            span.sr-only okok
+            span.sr-only
             span.icon-bar
             span.icon-bar
             span.icon-bar
