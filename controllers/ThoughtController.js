@@ -4,32 +4,60 @@ var mongoose = require('mongoose');
 var Thought = require('./../models/Thought');
 
 function add(req, res) {
+    // convert to lowercase to avoid duplication or selection mismatch
+    var thought = req.body.thought.toLowerCase();
 
-    var newThought = new Thought({
-        userId: new mongoose.Types.ObjectId,
-        itself: req.body.thought
-    });
-
-    newThought.save(function (err) {
-        if (err) throw err;
-    });
+    _saveNewThought(thought);
 
     res.json({
-        status: "ok",
-        added: req.body.thought
+        added: thought
     });
 }
 
 function get(req, res) {
-    res.json({
-        status: "ok",
-        list: []
+    var thoughtsResult = [];
+    Thought.find({}, function (err, foundThoughts) {
+        if (err) return handle(err);
+
+        foundThoughts.forEach(function(thought) {
+            thoughtsResult.push(thought.itself);
+        });
+        res.json({
+            list: thoughtsResult
+        });
     });
+}
+
+function getDistinct(req, res) {
+    var thoughtsResult = [];
+    Thought.distinct('itself', {}, function (err, foundThoughts) {
+        if (err) return handle(err);
+
+        foundThoughts.forEach(function(thought) {
+            thoughtsResult.push(thought);
+        });
+        res.json({
+            list: thoughtsResult
+        });
+    });
+}
+
+function _saveNewThought(thought) {
+    // todo: enrich Thought object with geo-location, client info, etc
+    var newThought = new Thought({
+        userId: new mongoose.Types.ObjectId,
+        itself: thought
+    });
+    newThought.save(function (err) {
+        if (err) throw err;
+    });
+    return newThought;
 }
 
 module.exports = {
     api: {
         add: add,
-        get: get
+        get: get,
+        getDistinct: getDistinct
     }
 };

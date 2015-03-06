@@ -13,5 +13,6 @@ router.get('/calendar', frontendController.calendar);
 /* API routes */
 router.post('/thought', thoughtController.api.add);
 router.get('/thought', thoughtController.api.get);
+router.get('/thought/distinct', thoughtController.api.getDistinct);
 
 module.exports = router;
