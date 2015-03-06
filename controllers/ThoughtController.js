@@ -17,7 +17,7 @@ function add(req, res) {
 function get(req, res) {
     var thoughtsResult = [];
     Thought.find({}, function (err, foundThoughts) {
-        if (err) return handle(err);
+        if (err) return errs.handle(err);
 
         foundThoughts.forEach(function(thought) {
             thoughtsResult.push(thought.itself);
@@ -31,7 +31,7 @@ function get(req, res) {
 function getDistinct(req, res) {
     var thoughtsResult = [];
     Thought.distinct('itself', {}, function (err, foundThoughts) {
-        if (err) return handle(err);
+        if (err) return errs.handle(err);
 
         foundThoughts.forEach(function(thought) {
             thoughtsResult.push(thought);
@@ -44,12 +44,13 @@ function getDistinct(req, res) {
 
 function _saveNewThought(thought) {
     // todo: enrich Thought object with geo-location, client info, etc
+    // todo: check of countToday, and increase if needed
     var newThought = new Thought({
         userId: new mongoose.Types.ObjectId,
         itself: thought
     });
     newThought.save(function (err) {
-        if (err) throw err;
+        if (err) errs.handle(err);
     });
     return newThought;
 }
