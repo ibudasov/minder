@@ -2,9 +2,10 @@ extends layout
 
 block content
   br
-  div.alert.alert-success&attributes({'role':'alert'}) Add your thought here
-  div.input-group
-    input.form-control&attributes({'type':'text', 'placeholder':'What?!..'})
-    span.input-group-btn
-      button.btn.btn-default&attributes({'type':'button'}) Add
+  div.alert.alert-warning&attributes({'role':'alert'}) Add your thought here. Don't be shy.
+  form#addThoughtForm
+    div#addPage.input-group
+      input#thoughtInput.form-control&attributes({'type': 'text', 'placeholder': 'What do you think?'})
+      span.input-group-btn
+        button.btn.btn-default&attributes({'type': 'submit'}) Add
 

@@ -6,3 +6,12 @@ span.label.label-margin {
   dislpay: inline;
   float: left;
 }
+.custom-alert {
+  position: absolute;
+  top:0;
+  left:0;
+  z-index:300;
+  width: 100%;
+  align: center;
+  font-weight: bold;
+}
