@@ -1,17 +1,23 @@
 .container {
-  width: 100%;
+    width: 100%;
 }
+
 span.label.label-margin {
-  margin: 5px;
-  dislpay: inline;
-  float: left;
+    margin: 5px;
+    dislpay: inline;
+    float: left;
 }
+
+span.label.label-margin.label-warning {
+  cursor: pointer;
+}
+
 .custom-alert {
-  position: absolute;
-  top:0;
-  left:0;
-  z-index:300;
-  width: 100%;
-  align: center;
-  font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 300;
+    width: 100%;
+    align: center;
+    font-weight: bold;
 }

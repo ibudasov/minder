@@ -12,6 +12,9 @@ $(function () {
     if ($('#statsPage').length !== 0) {
         minder.renderStatsPage();
     }
+    if ($('#quickAdd').length !== 0) {
+        minder.quickAdd();
+    }
 });
 
 minder = {
@@ -95,6 +98,38 @@ minder = {
             });
         }).fail(function () {
             minder.showError('Can not get Stats. Sorry.');
+        });
+    },
+
+    quickAdd: function () {
+        $.ajax({
+            type: 'GET',
+            url: "/thought/distinct"
+        }).done(function (thoughts) {
+            thoughts.list.forEach(function (thought) {
+                $('<span/>', {
+                    'class': 'label label-margin label-warning',
+                    'text': thought
+                }).appendTo('#quickAdd');
+            });
+            minder.quickAddClickProcessor();
+        }).fail(function () {
+            minder.showError('Can not get quick thoughts. Sorry.');
+        });
+    },
+
+    quickAddClickProcessor: function () {
+        $('span.label.label-warning').click(function () {
+            var thoughtToAdd = $(this).html();
+            $.ajax({
+                type: "POST",
+                url: "/thought",
+                data: {thought: thoughtToAdd}
+            }).done(function (msg) {
+                minder.showNotice('Well done!')
+            }).fail(function () {
+                minder.showError('Can not add tought. Sorry.');
+            });
         });
     }
 };
