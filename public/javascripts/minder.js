@@ -9,6 +9,9 @@ $(function () {
     if ($('#addPage').length !== 0) {
         minder.addThought();
     }
+    if ($('#statsPage').length !== 0) {
+        minder.renderStatsPage();
+    }
 });
 
 minder = {
@@ -46,7 +49,7 @@ minder = {
     },
 
     addThought: function () {
-        $('#addThoughtForm').submit(function(e){
+        $('#addThoughtForm').submit(function (e) {
             e.preventDefault();
             $.ajax({
                 type: "POST",
@@ -58,6 +61,40 @@ minder = {
                 minder.showError('Can not add tought. Sorry.');
             });
             $('#thoughtInput').val("");
+        });
+    },
+
+    renderStatsPage: function () {
+        $.ajax({
+            type: 'GET',
+            url: "/statistic/top"
+        }).done(function (thoughts) {
+            var maximumNumberOfThoughts = 0;
+            thoughts.topThoughts.forEach(function (thought) {
+
+                maximumNumberOfThoughts = (thought.numberOfEntries > maximumNumberOfThoughts)
+                    ? thought.numberOfEntries
+                    : maximumNumberOfThoughts;
+
+                var percentsOfProgressBar = 100 / maximumNumberOfThoughts * thought.numberOfEntries;
+
+                $('div#statsPage')
+                    .append($('<h4/>', {
+                        'text': thought._id
+                    }))
+                    .append($('<div class="progress"/>', {})
+                        .append($('<div/>', {
+                            'class': 'progress-bar progress-bar-info progress-bar-striped',
+                            'text': thought.numberOfEntries,
+                            'aria-valuenow': thought.numberOfEntries,
+                            'style': 'width: ' + percentsOfProgressBar + '%',
+                            'role': 'progressbar',
+                            'aria-valuemin': '0',
+                            'aria-valuemax': maximumNumberOfThoughts
+                        })));
+            });
+        }).fail(function () {
+            minder.showError('Can not get Stats. Sorry.');
         });
     }
 };
