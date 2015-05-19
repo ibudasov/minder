@@ -4,16 +4,25 @@ var Q = require('q');
 var _ = require('lodash');
 var moment = require('moment');
 
+// @see: http://passportjs.org/docs/profile
 var userSchema = new mongoose.Schema({
+    provider: {type: String},
     id: {type: String, unique: true},
-    accessToken: String,
-    username: {type: String, unique: true},
     displayName: {type: String},
     name: {
         familyName: String,
         givenName: String,
         middleName: String
     },
+    email: [{
+        value: {type: String},
+        type: {type: String}
+    }],
+    photos: [{
+        value: {type: String}
+    }],
+    accessToken: String,
+    username: {type: String, unique: true},
     gender: String,
     profileUrl: String,
     lastLoginAt: {type: Date, default: Date.now},
