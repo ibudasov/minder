@@ -1,11 +1,17 @@
 extends layout
 
 block content
+  blockquote Welcome to Minder — easiest way to track your thoughts.
   br
-  form#addThoughtForm
-    div#addPage.input-group
-      input#thoughtInput.form-control&attributes({'type': 'text', 'placeholder': 'What do you think, ' + userName + '?'})
-      span.input-group-btn
-        button.btn.btn-default&attributes({'type': 'submit'}) Add
   br
-  div#quickAdd
+  h4 How to use?
+  ul
+    li
+      a(href='add') Auth
+      span  with social networks
+    li Please start by
+      a(href='add')  adding new thought.
+    li
+      mark Share &rarr; Add to Home Screen
+      span  will be usable for iPhone users.
+
