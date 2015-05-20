@@ -70,7 +70,22 @@ userSchema.statics = {
             if (user) {
                 deferred.resolve(user);
             } else {
-                deferred.reject('User not found');
+                deferred.reject('User with ID = "' + userId + '" not found');
+            }
+        });
+        return deferred.promise;
+    },
+    findByAccessToken: function (accessToken) {
+        var deferred = Q.defer();
+        this.findOne({accessToken: accessToken}, function onUserFindByAccessToken(err, user) {
+            if (err) {
+                deferred.reject(err);
+                return;
+            }
+            if (user) {
+                deferred.resolve(user);
+            } else {
+                deferred.reject('User with accessToken = "' + accessToken + '" not found');
             }
         });
         return deferred.promise;
