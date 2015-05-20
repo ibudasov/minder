@@ -32,18 +32,18 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {
 router.get('/', pageController.main);
 router.get('/login', pageController.login);
 router.get('/logout', pageController.logout);
-router.get('/add', acl.requireAuth, pageController.add);
-router.get('/stats', acl.requireAuth, pageController.stats);
-router.get('/cloud', acl.requireAuth, pageController.cloud);
-router.get('/calendar', acl.requireAuth, pageController.calendar);
+router.get('/add', acl.checkPageAuth, pageController.add);
+router.get('/stats', acl.checkPageAuth, pageController.stats);
+router.get('/cloud', acl.checkPageAuth, pageController.cloud);
+router.get('/calendar', acl.checkPageAuth, pageController.calendar);
 
 /**
  *  API routes
  */
-router.post('/thought', thoughtController.api.add);
-router.get('/thought', thoughtController.api.get);
-router.get('/thought/distinct', thoughtController.api.getDistinct);
-router.get('/statistic/top/', statisticController.api.top);
-router.get('/statistic/top/:limit([1-9])', statisticController.api.top);
+router.post('/thought', acl.checkApiAuth, thoughtController.api.add);
+router.get('/thought', acl.checkApiAuth, thoughtController.api.get);
+router.get('/thought/distinct', acl.checkApiAuth, thoughtController.api.getDistinct);
+router.get('/statistic/top/', acl.checkApiAuth, statisticController.api.top);
+router.get('/statistic/top/:limit([1-9])', acl.checkApiAuth, statisticController.api.top);
 
 module.exports = router;
