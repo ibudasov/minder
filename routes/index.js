@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 var userController = require('../controllers/UserController.js');
 var thoughtController = require('../controllers/ThoughtController.js');
-var frontendController = require('../controllers/FrontendController.js');
+var pageController = require('../controllers/PageController.js');
 var statisticController = require('../controllers/StatisticController.js');
-var policy = require('../lib/policy.js');
+var acl = require('../lib/acl.js');
 var passport = require('passport');
 
 /**
@@ -14,7 +14,9 @@ userController.loginWithFacebook();
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
 //     /auth/facebook/callback
-router.get('/auth/facebook', passport.authenticate('facebook'));
+router.get('/auth/facebook', passport.authenticate('facebook',
+    { scope: [ 'email'] }
+));
 // Facebook will redirect the user to this URL after approval.  Finish the
 // authentication process by attempting to obtain an access token.  If
 // access was granted, the user will be logged in.  Otherwise,
@@ -27,12 +29,13 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {
 /**
  *  Frontend routes
  */
-router.get('/', frontendController.main);
-router.get('/add', frontendController.add);
-router.get('/stats', frontendController.stats);
-router.get('/cloud', frontendController.cloud);
-router.get('/calendar', frontendController.calendar);
-
+router.get('/', pageController.main);
+router.get('/login', pageController.login);
+router.get('/logout', pageController.logout);
+router.get('/add', acl.requireAuth, pageController.add);
+router.get('/stats', acl.requireAuth, pageController.stats);
+router.get('/cloud', acl.requireAuth, pageController.cloud);
+router.get('/calendar', acl.requireAuth, pageController.calendar);
 
 /**
  *  API routes

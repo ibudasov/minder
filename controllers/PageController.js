@@ -1,6 +1,7 @@
 function main(req, res) {
     res.render('main', {
-        title: 'Minder — Dashboard'
+        title: 'Minder — Dashboard',
+        userName: 'sir'//req.session.passport.user.displayName
     });
 }
 
@@ -28,10 +29,24 @@ function calendar(req, res) {
     });
 }
 
+function logout(req, res) {
+    req.logout();
+    res.redirect('/');
+}
+
+function login(req, res) {
+    res.render('login', {
+        title: 'Minder — Login'
+    });
+}
+
+
 module.exports = {
     main: main,
     add: add,
     stats: stats,
     cloud: cloud,
-    calendar: calendar
+    calendar: calendar,
+    login: login,
+    logout: logout
 };

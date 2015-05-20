@@ -18,8 +18,9 @@ function loginWithFacebook(req, res) {
         },
         function (accessToken, refreshToken, profile, done) {
             profile.accessToken = accessToken;
-            User.findOrCreate(profile);
-            done(null, profile);
+            User.findOrCreate(profile)
+                .then(done.bind(null, null)) // = done(null, User);
+                .catch(done); // = done(err);
         }
     ));
 
@@ -27,11 +28,13 @@ function loginWithFacebook(req, res) {
      * Serialize-deserialize routines
      * @see: http://stackoverflow.com/questions/19948816/error-failed-to-serialize-user-into-session
      */
-    passport.serializeUser(function(user, done) {
+    passport.serializeUser(function (user, done) {
         done(null, user);
     });
-    passport.deserializeUser(function(user, done) {
-        done(null, user);
+    passport.deserializeUser(function (user, done) {
+        User.findById(user.id)
+            .then(done.bind(null, null)) // = done(null, User);
+            .catch(done); // = done(err);
     });
 }
 

@@ -14,7 +14,7 @@ var userSchema = new mongoose.Schema({
         givenName: String,
         middleName: String
     },
-    email: [{
+    emails: [{
         value: {type: String},
         type: {type: String}
     }],
