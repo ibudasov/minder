@@ -1,13 +1,13 @@
 function main(req, res) {
     res.render('main', {
-        title: 'Minder — Dashboard',
-        userName: 'sir'//req.session.passport.user.displayName
+        title: 'Minder'
     });
 }
 
 function add(req, res) {
     res.render('add', {
-        title: 'Minder — Add Thought'
+        title: 'Minder — Add Thought',
+        userName: req.session.passport.user.displayName
     });
 }
 
