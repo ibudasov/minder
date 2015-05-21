@@ -5,7 +5,7 @@ var _ = require('lodash');
 var moment = require('moment');
 
 // @see: http://passportjs.org/docs/profile
-var userSchema = new mongoose.Schema({
+var UserSchema = new mongoose.Schema({
     provider: {type: String},
     id: {type: String, unique: true},
     displayName: {type: String},
@@ -29,7 +29,7 @@ var userSchema = new mongoose.Schema({
     createdAt: {type: Date, default: Date.now}
 });
 
-userSchema.statics = {
+UserSchema.statics = {
     findOrCreate: function (userData) {
         var deferred = Q.defer();
         this.findOne({id: userData.id}, function onUserFind(err, user) {
@@ -93,6 +93,6 @@ userSchema.statics = {
 };
 
 
-var User = mongoose.model('User', userSchema);
+var User = mongoose.model('User', UserSchema);
 
 module.exports = User;

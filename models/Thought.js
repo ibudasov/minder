@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var Q = require('q');
+var moment = require('moment');
 
 var ThoughtSchema = new mongoose.Schema({
     userId: ObjectId,
@@ -66,6 +67,43 @@ ThoughtSchema.statics = {
             }
             deferred.resolve(thought);
         });
+        return deferred.promise;
+    },
+    getTopThoughts: function (req) {
+        var deferred = Q.defer(),
+            limit = ((parseInt(req.params.limit) > 0) ? parseInt(req.params.limit) : 5),
+            currentDate = moment().toISOString(),
+            monthAgoDate = moment().subtract(1, 'month').toISOString();
+
+        this.aggregate(
+            {
+                $match: {
+                    'createdAt': {
+                        $gte: new Date(monthAgoDate),
+                        $lt: new Date(currentDate)
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: "$itself",
+                    numberOfEntries: {$sum: '$countToday'}
+                }
+            },
+            {$sort: {numberOfEntries: -1}},
+            {$limit: limit},
+            function (err, result) {
+                if (err) {
+                    deferred.reject(err);
+                    return;
+                }
+                if (result) {
+                    deferred.resolve(result);
+                } else {
+                    deferred.reject('No thoughts found');
+                }
+            });
+
         return deferred.promise;
     },
     getDummy: function () {

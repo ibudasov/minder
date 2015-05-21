@@ -1,6 +1,5 @@
 var errs = require('./../errorHandler.js');
 var Thought = require('./../models/Thought');
-var moment = require('moment');
 
 /**
  * Returns aggregated distincted thoughts with their count
@@ -9,32 +8,14 @@ var moment = require('moment');
  * @param res
  */
 function top(req, res) {
-    var limit = ((parseInt(req.params.limit) > 0) ? parseInt(req.params.limit) : 5),
-        currentDate = moment().toISOString(),
-        monthAgoDate = moment().subtract(1, 'month').toISOString();
-
-    Thought.aggregate(
-        {
-            $match: {
-                'createdAt': {
-                    $gte: new Date(monthAgoDate),
-                    $lt: new Date(currentDate)
-                }
-            }
-        },
-        {
-            $group: {
-                _id: "$itself",
-                numberOfEntries: {$sum: '$countToday'}
-            }
-        },
-        {$sort: {numberOfEntries: -1}},
-        {$limit: limit},
-        function (err, result) {
-            if (err) return errs.handle(err, res);
+    Thought.getTopThoughts(req)
+        .then(function (result) {
             res.json({
                 topThoughts: result
             });
+        })
+        .catch(function (err) {
+            errs.handle(err, res);
         });
 }
 
