@@ -26,6 +26,37 @@ ThoughtSchema.statics = {
                 }
             });
         return deferred.promise;
+    },
+    getAllThoughtsDistinct: function () {
+        var deferred = Q.defer();
+        /**
+         * There is no possibility to use distinct with sort, so I've solved problem
+         * with aggregation function;
+         * @see: http://stackoverflow.com/questions/27968930/sort-and-distinct-in-mongoose
+         */
+        this.aggregate(
+            {
+                $group: {
+                    _id: "$itself"
+                }
+            },
+            {$sort: {createdAt: -1}},
+            function (err, foundThoughts) {
+                if (err) {
+                    deferred.reject(err);
+                    return;
+                }
+                if (foundThoughts) {
+                    deferred.resolve(foundThoughts);
+                } else {
+                    deferred.reject('No thoughts found');
+                }
+            });
+        return deferred.promise;
+    },
+    getDummy: function () {
+        var deferred = Q.defer();
+        return deferred.promise;
     }
 };
 

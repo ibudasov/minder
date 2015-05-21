@@ -37,26 +37,19 @@ function get(req, res) {
 function getDistinct(req, res) {
     var thoughtsResult = [];
 
-    /**
-     * There is no possibility to use distinct with sort, so I've solved problem
-     * with aggregation function;
-     * @see: http://stackoverflow.com/questions/27968930/sort-and-distinct-in-mongoose
-     */
-    Thought.aggregate(
-        {
-            $group: {
-                _id: "$itself"
-            }
-        },
-        {$sort: {createdAt: -1}},
-        function (err, foundThoughts) {
-            if (err) return errs.handle(err);
+    Thought.getAllThoughtsDistinct()
+        .then(function (foundThoughts) {
             foundThoughts.forEach(function (thought) {
                 thoughtsResult.push(thought._id);
             });
 
             res.json({
                 list: thoughtsResult
+            });
+        })
+        .catch(function (errorMessage) {
+            res.json({
+                error: errorMessage
             });
         });
 }
