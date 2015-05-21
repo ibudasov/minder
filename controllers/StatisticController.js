@@ -31,7 +31,7 @@ function top(req, res) {
         {$sort: {numberOfEntries: -1}},
         {$limit: limit},
         function (err, result) {
-            if (err) return errs.handle(err);
+            if (err) return errs.handle(err, res);
             res.json({
                 topThoughts: result
             });

@@ -1,9 +1,9 @@
-exports.handle = function (err, msg, res, status) {
+exports.handle = function (err, res, status) {
     if (err) {
-        console.log(msg, err.message);
+        console.log(err.message);
         console.trace();
         if (res) {
-            res.send(msg + " | " + err, status || 500);
+            res.send(err, status || 500);
         }
         return true;
     }

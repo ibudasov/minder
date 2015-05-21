@@ -54,6 +54,20 @@ ThoughtSchema.statics = {
             });
         return deferred.promise;
     },
+    createNewThought: function (thoughtData) {
+        // todo: enrich Thought object with geo-location, client info, etc
+        // todo: check of countToday, and increase if needed
+        var deferred = Q.defer();
+        var thought = new Thought(thoughtData);
+        thought.save(function (err) {
+            if (err) {
+                deferred.reject(err);
+                return;
+            }
+            deferred.resolve(thought);
+        });
+        return deferred.promise;
+    },
     getDummy: function () {
         var deferred = Q.defer();
         return deferred.promise;
