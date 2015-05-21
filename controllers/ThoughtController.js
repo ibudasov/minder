@@ -2,6 +2,7 @@ var errs = require('./../errorHandler.js');
 var config = require('config');
 var mongoose = require('mongoose');
 var Thought = require('./../models/Thought');
+var Q = require('q');
 
 function add(req, res) {
     // convert to lowercase to avoid duplication or selection mismatch
@@ -16,17 +17,19 @@ function add(req, res) {
 
 function get(req, res) {
     var thoughtsResult = [];
-    Thought.find()
-        .sort({'createdAt': -1})
-        .exec(function (err, foundThoughts) {
-            if (err) return errs.handle(err);
 
+    Thought.getAllThoughts()
+        .then(function (foundThoughts) {
             foundThoughts.forEach(function (thought) {
                 thoughtsResult.push(thought.itself);
             });
-
             res.json({
                 list: thoughtsResult
+            });
+        })
+        .catch(function (errorMessage) {
+            res.json({
+                error: errorMessage
             });
         });
 }
