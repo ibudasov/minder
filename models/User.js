@@ -21,7 +21,6 @@ var UserSchema = new mongoose.Schema({
         value: {type: String}
     }],
     accessToken: String,
-    username: {type: String, unique: true},
     gender: String,
     profileUrl: String,
     lastLoginAt: {type: Date, default: Date.now},

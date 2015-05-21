@@ -37,14 +37,8 @@ ThoughtSchema.statics = {
          * @see: http://stackoverflow.com/questions/27968930/sort-and-distinct-in-mongoose
          */
         this.aggregate(
-            {
-                $match: {
-                    'userId': user._id
-                },
-                $group: {
-                    _id: "$itself"
-                }
-            },
+            {$match: {'userId': user._id}},
+            {$group: {_id: "$itself"}},
             {$sort: {createdAt: -1}},
             function (err, foundThoughts) {
                 if (err) {

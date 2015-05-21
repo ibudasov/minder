@@ -4,5 +4,10 @@ module.exports = {
 
     "FB_CLIENT_SECRET": "977dd238fa42ccd3798e9d1175bb1ac9",
     "FB_CLIENT_ID": "1060391333988383",
-    "FB_CALLBACK_URL": "https://minder-dev.herokuapp.com/auth/facebook/callback"
+    "FB_CALLBACK_URL": "https://minder-dev.herokuapp.com/auth/facebook/callback",
+
+    "GOOGLE_CLIENT_SECRET": "",
+    "GOOGLE_CLIENT_ID": "",
+    "GOOGLE_CALLBACK_URL": "https://minder-dev.herokuapp.com/auth/google/callback"
+
 };
