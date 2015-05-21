@@ -11,10 +11,11 @@ var ThoughtSchema = new mongoose.Schema({
 });
 
 ThoughtSchema.statics = {
-    getAllThoughts: function () {
+    getAllThoughts: function (user) {
         var deferred = Q.defer();
         this.find()
             .sort({'createdAt': -1})
+            .where('userId').equals(user._id)
             .exec(function (err, foundThoughts) {
                 if (err) {
                     deferred.reject(err);
@@ -28,7 +29,7 @@ ThoughtSchema.statics = {
             });
         return deferred.promise;
     },
-    getAllThoughtsDistinct: function () {
+    getAllThoughtsDistinct: function (user) {
         var deferred = Q.defer();
         /**
          * There is no possibility to use distinct with sort, so I've solved problem
@@ -37,6 +38,9 @@ ThoughtSchema.statics = {
          */
         this.aggregate(
             {
+                $match: {
+                    'userId': user._id
+                },
                 $group: {
                     _id: "$itself"
                 }
@@ -74,14 +78,14 @@ ThoughtSchema.statics = {
             limit = ((parseInt(req.params.limit) > 0) ? parseInt(req.params.limit) : 5),
             currentDate = moment().toISOString(),
             monthAgoDate = moment().subtract(1, 'month').toISOString();
-
         this.aggregate(
             {
                 $match: {
                     'createdAt': {
                         $gte: new Date(monthAgoDate),
                         $lt: new Date(currentDate)
-                    }
+                    },
+                    'userId': req.user._id
                 }
             },
             {

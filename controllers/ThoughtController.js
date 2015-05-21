@@ -20,7 +20,7 @@ function add(req, res) {
 }
 
 function get(req, res) {
-    Thought.getAllThoughts()
+    Thought.getAllThoughts(req.user)
         .then(function (foundThoughts) {
             res.json({
                 list: foundThoughts.map(function (thought) {
@@ -34,7 +34,7 @@ function get(req, res) {
 }
 
 function getDistinct(req, res) {
-    Thought.getAllThoughtsDistinct()
+    Thought.getAllThoughtsDistinct(req.user)
         .then(function (foundThoughts) {
             res.json({
                 list: foundThoughts.map(function (thought) {

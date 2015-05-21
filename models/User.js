@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var ObjectId = mongoose.Schema.Types.ObjectId;
 var Q = require('q');
 var _ = require('lodash');
 var moment = require('moment');
