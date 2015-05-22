@@ -40,6 +40,9 @@ minder = {
             type: 'GET',
             url: "/thought"
         }).done(function (thoughts) {
+            if (thoughts.list.length > 0) {
+                $('#cloudPage').html("");
+            }
             thoughts.list.forEach(function (thought) {
                 $('<span/>', {
                     'class': 'label label-margin label-info',
@@ -55,7 +58,7 @@ minder = {
         $('#addThoughtForm').submit(function (e) {
             e.preventDefault();
             var thoughtToAdd = $('#thoughtInput').val().toString();
-            if(!thoughtToAdd.length) {
+            if (!thoughtToAdd.length) {
                 minder.showError('Forgot to specify thought?');
                 return false;
             }
@@ -64,7 +67,8 @@ minder = {
                 url: "/thought",
                 data: {thought: thoughtToAdd}
             }).done(function (msg) {
-                minder.showNotice('Well done!')
+                minder.showNotice('Well done!');
+                minder.quickAdd();
             }).fail(function () {
                 minder.showError('Can not add tought. Sorry.');
             });
@@ -78,6 +82,9 @@ minder = {
             url: "/statistic/top"
         }).done(function (thoughts) {
             var maximumNumberOfThoughts = 0;
+            if (thoughts.topThoughts.length > 0) {
+                $('#statsPage').html("");
+            }
             thoughts.topThoughts.forEach(function (thought) {
 
                 maximumNumberOfThoughts = (thought.numberOfEntries > maximumNumberOfThoughts)
@@ -111,6 +118,9 @@ minder = {
             type: 'GET',
             url: "/thought/distinct"
         }).done(function (thoughts) {
+            if (thoughts.list.length > 0) {
+                $('#quickAdd').html("");
+            }
             thoughts.list.forEach(function (thought) {
                 $('<span/>', {
                     'class': 'label label-margin label-warning',
@@ -127,7 +137,7 @@ minder = {
         $('span.label.label-warning').click(function (e) {
             e.preventDefault();
             var thoughtToAdd = $(this).html().toString();
-            if(!thoughtToAdd.length) {
+            if (!thoughtToAdd.length) {
                 minder.showError('Forgot to specify thought?');
             }
             $.ajax({
