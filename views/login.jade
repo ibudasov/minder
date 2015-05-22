@@ -1,24 +1,25 @@
 extends layout
 
 block content
-  div.row.col-md-8.col-md-offset-2
-  div.panel.panel-primary
-    div.panel-heading
-      h3.panel-title Login, please
-    div.panel-body
-      br
-      ul.nav.nav-pills
-        li.active&attributes({'role': 'presentation'})
-          a(href='auth/facebook')
-            span.glyphicon.glyphicon-thumbs-up&attributes({'aria-hidden': 'true'})  Facebook
-
-        li.pull-right.active&attributes({'role': 'presentation'})
-          a(href='auth/google')
-            span.glyphicon.glyphicon-envelope&attributes({'aria-hidden': 'true'})  Google
-      br
-      hr
-      ul.nav.nav-pills.pull-right
-        li&attributes({'role': 'presentation'})
-          a(href='logout')
-            span.glyphicon.glyphicon-log-out&attributes({'aria-hidden': 'true'})  LogOut
+    div.row.col-md-8.col-md-offset-2
+    div.panel.panel-primary
+        div.panel-heading
+            h3.panel-title Authentification
+        div.panel-body.text-center
+            br
+            if !loggedIn
+                button.btn.btn-default&attributes({'type': 'button'})
+                    a(href='auth/facebook')
+                        span.glyphicon.glyphicon-thumbs-up&attributes({'aria-hidden': 'true'})  Facebook
+                br
+                br
+                button.btn.btn-default&attributes({'type': 'button'})
+                    a(href='auth/google')
+                        span.glyphicon.glyphicon-envelope&attributes({'aria-hidden': 'true'})  Google
+            else
+                button.btn.btn-default&attributes({'type': 'button'})
+                    a(href='logout')
+                        span.glyphicon.glyphicon-log-out&attributes({'aria-hidden': 'true'})  LogOut
+            br
+            br
 

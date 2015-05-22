@@ -1,5 +1,5 @@
 function main(req, res) {
-    if(req.session.passport && req.session.passport.user) {
+    if (isUserLoggedIn(req)) {
         res.redirect('/add');
     }
     res.render('main', {
@@ -39,8 +39,13 @@ function logout(req, res) {
 
 function login(req, res) {
     res.render('login', {
-        title: 'Minder — Login'
+        title: 'Minder — Login',
+        loggedIn: isUserLoggedIn(req)
     });
+}
+
+function isUserLoggedIn(req) {
+    return !!(req.session && req.session.passport && req.session.passport.user);
 }
 
 
