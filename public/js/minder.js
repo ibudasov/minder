@@ -24,7 +24,7 @@ minder = {
             'class': 'alert alert-danger custom-alert',
             'role': 'alert',
             'text': err
-        }).appendTo('div.container-fluid');
+        }).appendTo('div.container-fluid').fadeOut(5000);
     },
 
     showNotice: function (err) {
@@ -54,10 +54,15 @@ minder = {
     addThought: function () {
         $('#addThoughtForm').submit(function (e) {
             e.preventDefault();
+            var thoughtToAdd = $('#thoughtInput').val().toString();
+            if(!thoughtToAdd.length) {
+                minder.showError('Forgot to specify thought?');
+                return false;
+            }
             $.ajax({
                 type: "POST",
                 url: "/thought",
-                data: {thought: $('#thoughtInput').val()}
+                data: {thought: thoughtToAdd}
             }).done(function (msg) {
                 minder.showNotice('Well done!')
             }).fail(function () {
@@ -119,8 +124,12 @@ minder = {
     },
 
     quickAddClickProcessor: function () {
-        $('span.label.label-warning').click(function () {
-            var thoughtToAdd = $(this).html();
+        $('span.label.label-warning').click(function (e) {
+            e.preventDefault();
+            var thoughtToAdd = $(this).html().toString();
+            if(!thoughtToAdd.length) {
+                minder.showError('Forgot to specify thought?');
+            }
             $.ajax({
                 type: "POST",
                 url: "/thought",
