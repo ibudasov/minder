@@ -1,4 +1,7 @@
 function main(req, res) {
+    if(req.session.passport && req.session.passport.user) {
+        res.redirect('/add');
+    }
     res.render('main', {
         title: 'Minder'
     });

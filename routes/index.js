@@ -26,11 +26,11 @@ router.get('/auth/google', passport.authenticate('google',
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 router.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    successRedirect: '/stats',
+    successRedirect: '/add',
     failureRedirect: '/'
 }));
 router.get('/auth/google/callback', passport.authenticate('google', {
-    successRedirect: '/stats',
+    successRedirect: '/add',
     failureRedirect: '/'
 }));
 
