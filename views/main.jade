@@ -1,18 +1,24 @@
 extends layout
 
 block content
-  blockquote Welcome to Minder — easiest way to track your thoughts.
-  blockquote ...is that for super-nerds &  managers? :)
-    footer
-      cite Zork
-  h4 How to use?
-  ul
-    li
-      a(href='login') Auth
-      span  with social networks
-    li Please start by
-      a(href='add')  adding new thought.
-    li
-      mark Share &rarr; Add to Home Screen
-      span  will be usable for iPhone users.
+  div.alert.alert-success
+    h4 Minder
+    p Minder will provide you statistics about your thoughts
+  p.text-center
+    span.glyphicon.glyphicon-arrow-up&attributes({'aria-hidden':'true'})
+  div.alert.alert-warning
+    h4 Add
+    p Add you thoughts as often as you can
+  p.text-center
+    span.glyphicon.glyphicon-arrow-up&attributes({'aria-hidden':'true'})
+
+  div.alert.alert-info
+    h4 Login
+    p.text-center
+      button.btn.btn-default&attributes({'type': 'button'})
+        a(href='auth/facebook')
+          span.glyphicon.glyphicon-thumbs-up&attributes({'aria-hidden': 'true'})  Facebook
+      button.btn.btn-default&attributes({'type': 'button'})
+        a(href='auth/google')
+          span.glyphicon.glyphicon-envelope&attributes({'aria-hidden': 'true'})  Google
 
