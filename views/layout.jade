@@ -29,7 +29,7 @@ html
     script(rel='text/javascript', src='/js/minder.js')
   body
     div.container-fluid.col-lg-offset-4.col-lg-3.col-md-offset-4.col-md-4.col-sm-offset-3.col-sm-5
-      h3.pull-left
+      h2.pull-left
         a(href='/') Minder
       br
       ul.nav.nav-pills.pull-right
@@ -38,17 +38,16 @@ html
             span.glyphicon.glyphicon-plus&attributes({'aria-hidden':'true'})
         li&attributes({'role':'presentation'})
           a(href='stats')&attributes({'title':'Statistics about your thoughts'})
-            span.glyphicon.glyphicon-stats&attributes({'aria-hidden':'true'})
+            span.glyphicon.glyphicon-saved&attributes({'aria-hidden':'true'})
         li&attributes({'role':'presentation'})
           a(href='cloud')&attributes({'title':'All your thoughts'})
-            span.glyphicon.glyphicon-cloud&attributes({'aria-hidden':'true'})
+            span.glyphicon.glyphicon-align-left&attributes({'aria-hidden':'true'})
         li&attributes({'role': 'presentation'})
           a(href='login')&attributes({'title':'Login or logout'})
             span.glyphicon.glyphicon-user&attributes({'aria-hidden': 'true'})
-    div.container
+    hr
+  div.container
       div.starter-template.col-lg-offset-4.col-lg-3.col-md-offset-4.col-md-4.col-sm-offset-3.col-sm-5
-        br
-        br
         block content
 
 

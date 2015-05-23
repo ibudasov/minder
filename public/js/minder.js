@@ -85,28 +85,46 @@ minder = {
             if (thoughts.topThoughts.length > 0) {
                 $('#statsPage').html("");
             }
-            thoughts.topThoughts.forEach(function (thought) {
+            $('div#statsPage').append($('<div class="progress"/>', {}));
 
-                maximumNumberOfThoughts = (thought.numberOfEntries > maximumNumberOfThoughts)
-                    ? thought.numberOfEntries
-                    : maximumNumberOfThoughts;
+            var sumOfAllThoughts = thoughts.topThoughts.map(function (thought) {
+                return thought.numberOfEntries;
+            }).reduce(function (previousValue, currentValue, index, array) {
+                return previousValue + currentValue;
+            });
 
-                var percentsOfProgressBar = 100 / maximumNumberOfThoughts * thought.numberOfEntries;
+            var colorsForProgressBar = [
+                    'progress-bar-danger',
+                    'progress-bar-warning',
+                    'progress-bar-success',
+                    'progress-bar-info',
+                    'progress-bar'
+                ],
+                colorsForBadges = [
+                    'label-danger',
+                    'label-warning',
+                    'label-success',
+                    'label-info',
+                    'label-primary'
+                ];
+
+            thoughts.topThoughts.forEach(function (thought, i) {
+                var percentsOfProgressBar = 100 / sumOfAllThoughts * thought.numberOfEntries;
+                $('div.progress')
+                    .append($('<div/>', {
+                        'class': 'progress-bar ' + colorsForProgressBar[i],
+                        'text': Math.round(percentsOfProgressBar) + '%',
+                        'aria-valuenow': thought.numberOfEntries,
+                        'style': 'width: ' + percentsOfProgressBar + '%',
+                        'role': 'progressbar',
+                        'aria-valuemin': '0',
+                        'aria-valuemax': maximumNumberOfThoughts
+                    }));
 
                 $('div#statsPage')
-                    .append($('<h4/>', {
-                        'text': thought._id
-                    }))
-                    .append($('<div class="progress"/>', {})
-                        .append($('<div/>', {
-                            'class': 'progress-bar progress-bar-info progress-bar-striped',
-                            'text': thought.numberOfEntries,
-                            'aria-valuenow': thought.numberOfEntries,
-                            'style': 'width: ' + percentsOfProgressBar + '%',
-                            'role': 'progressbar',
-                            'aria-valuemin': '0',
-                            'aria-valuemax': maximumNumberOfThoughts
-                        })));
+                    .append($('<h4/>', {'text': thought._id})
+                        .append($('<span class="label pull-right ' + colorsForBadges[i] + '"/>').text(thought.numberOfEntries))
+                );
             });
         }).fail(function () {
             minder.showError('Can not get Stats. Sorry.');

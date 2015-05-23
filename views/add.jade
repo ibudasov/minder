@@ -6,7 +6,8 @@ block content
     div#addPage.input-group
       input#thoughtInput.form-control&attributes({'type': 'text', 'placeholder': 'What do you think, ' + userName + '?'})
       span.input-group-btn
-        button.btn.btn-default&attributes({'type': 'submit'}) Add
+        button.btn.btn-default&attributes({'type': 'submit'})
+          span.glyphicon.glyphicon-plus-sign&attributes({'aria-hidden':'true'})
   br
   div#quickAdd
     p.text-center
