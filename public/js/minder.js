@@ -24,7 +24,7 @@ minder = {
             'class': 'alert alert-danger custom-alert',
             'role': 'alert',
             'text': err
-        }).appendTo('div.container-fluid').fadeOut(5000);
+        }).appendTo('div.pleaseShowMessagesHere').fadeOut(5000);
     },
 
     showNotice: function (err) {
@@ -32,7 +32,7 @@ minder = {
             'class': 'alert alert-success custom-alert',
             'role': 'alert',
             'text': err
-        }).appendTo('div.container-fluid').fadeOut(2000);
+        }).appendTo('div.pleaseShowMessagesHere').fadeOut(2000);
     },
 
     getCloudOfThoughts: function () {
