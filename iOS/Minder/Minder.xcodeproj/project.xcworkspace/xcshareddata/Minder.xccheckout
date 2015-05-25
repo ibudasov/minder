@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1E124676-A910-4D31-89E8-9EB80E848001</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9953C1B94D3EEFB81036E6B2C70C4369158FE0AF</key>
+		<string>bitbucket.org:ibudasov/minder.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iOS/Minder/Minder.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9953C1B94D3EEFB81036E6B2C70C4369158FE0AF</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>bitbucket.org:ibudasov/minder.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9953C1B94D3EEFB81036E6B2C70C4369158FE0AF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9953C1B94D3EEFB81036E6B2C70C4369158FE0AF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>minder</string>
+		</dict>
+	</array>
+</dict>
+</plist>

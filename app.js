@@ -30,6 +30,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function (req, res, next) {
+    var origRender = res.render;
+    res.render = function (view, locals, callback) {
+        if ('function' == typeof locals) {
+            callback = locals;
+            locals = undefined;
+        }
+        if (!locals) {
+            locals = {};
+        }
+        locals.req = req;
+        origRender.call(res, view, locals, callback);
+    };
+    next();
+});
 
 app.use('/', routes);
 app.use('/users', users);
@@ -42,7 +57,6 @@ app.use(function (req, res, next) {
 });
 
 // error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {

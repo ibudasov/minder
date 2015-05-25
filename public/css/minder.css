@@ -21,3 +21,7 @@ span.label.label-margin.label-warning {
     align: center;
     font-weight: bold;
 }
+
+.starter-template {
+    border-top: 1px solid lightgray;
+}
