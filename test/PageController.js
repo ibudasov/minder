@@ -2,7 +2,6 @@
 var http = require('http');
 var errs = require('./../errorHandler.js');
 
-
 describe('Main page', function () {
     it('http code should be success', function (done) {
 
