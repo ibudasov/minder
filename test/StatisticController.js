@@ -1,9 +1,9 @@
 'use strict';
 var http = require('http');
-var errs = require('./../errorHandler.js');
+var fakeToken = 1234567890;
 
 describe('API GET /statistic/top', function () {
-    it('http code should be 401', function (done) {
+    it('anonymous http code should be 401', function (done) {
 
         var options = {
             port: 3000,
@@ -21,15 +21,39 @@ describe('API GET /statistic/top', function () {
         req.on('error', function (e) {
             done(e);
         });
-        req.on('end', function (e) {
-            done();
+        req.end();
+    });
+
+    it('authentificated http response should have .topThoughts array', function (done) {
+
+        var options = {
+            hostname: '127.0.0.1',
+            port: 3000,
+            path: '/statistic/top?accessToken=' + fakeToken,
+            agent: false,
+            method: 'get'
+        };
+
+        var req = http.request(options, function (res) {
+            var body = '';
+            res.on('data', function (chunk) {
+                body += chunk;
+            });
+            res.on('end', function () {
+                var bodyObject = JSON.parse(body);
+                bodyObject.should.have.property('topThoughts');
+                done();
+            });
+        });
+        req.on('error', function (e) {
+            done(e);
         });
         req.end();
     });
 });
 
 describe('API GET /statistic/top/5', function () {
-    it('http code should be 401', function (done) {
+    it('anonymous http code should be 401', function (done) {
 
         var options = {
             hostname: '127.0.0.1',
@@ -47,8 +71,61 @@ describe('API GET /statistic/top/5', function () {
         req.on('error', function (e) {
             done(e);
         });
-        req.on('end', function (e) {
-            done();
+        req.end();
+    });
+
+    it('authentificated http response should have .topThoughts array', function (done) {
+
+        var options = {
+            hostname: '127.0.0.1',
+            port: 3000,
+            path: '/statistic/top/5?accessToken=' + fakeToken,
+            agent: false,
+            method: 'get'
+        };
+
+        var req = http.request(options, function (res) {
+            var body = '';
+            res.on('data', function (chunk) {
+                body += chunk;
+            });
+            res.on('end', function () {
+                var bodyObject = JSON.parse(body);
+                bodyObject.should.have.property('topThoughts');
+                done();
+            });
+        });
+        req.on('error', function (e) {
+            done(e);
+        });
+        req.end();
+    });
+
+    it('authentificated http response should have 5 elements in .topThoughts array', function (done) {
+
+        var options = {
+            hostname: '127.0.0.1',
+            port: 3000,
+            path: '/statistic/top/5?accessToken=' + fakeToken,
+            agent: false,
+            method: 'get'
+        };
+
+        var req = http.request(options, function (res) {
+            var body = '';
+            res.on('data', function (chunk) {
+                body += chunk;
+            });
+            res.on('end', function () {
+                var bodyObject = JSON.parse(body);
+                bodyObject.should.have.property('topThoughts');
+                // @see: https://github.com/tj/should.js/
+                bodyObject.topThoughts.length.should.not.be.above(5);
+                done();
+            });
+        });
+        req.on('error', function (e) {
+            done(e);
         });
         req.end();
     });
