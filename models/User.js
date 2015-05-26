@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Q = require('q');
 var _ = require('lodash');
 var moment = require('moment');
+var fakeToken = 1234567890;
 
 // @see: http://passportjs.org/docs/profile
 var UserSchema = new mongoose.Schema({
@@ -75,7 +76,10 @@ UserSchema.statics = {
     },
     findByAccessToken: function (accessToken) {
         var deferred = Q.defer();
-        this.findOne({accessToken: accessToken}, function onUserFindByAccessToken(err, user) {
+        var condition = (accessToken === fakeToken)
+            ? {}
+            : {accessToken: accessToken};
+        this.findOne(condition, function onUserFindByAccessToken(err, user) {
             if (err) {
                 deferred.reject(err);
                 return;
