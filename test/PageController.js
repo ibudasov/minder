@@ -6,18 +6,25 @@ describe('Main page', function () {
     it('http code should be success', function (done) {
 
         var options = {
-            host: 'localhost',
+            hostname: 'localhost',
             port: 3000,
             path: '/',
+            agent: false,
             method: 'get'
         };
 
-        http.get(options, function (res) {
+        var req = http.request(options, function(res) {
             res.statusCode.should.equal(200);
-        }).on('error', function (e) {
-            errs.handle(e);
+            req.end();
+            done();
         });
-        done();
+        req.on('error', function (e) {
+            done(e);
+        });
+        req.on('end', function (e) {
+            done();
+        });
+        req.end();
     });
 });
 
@@ -25,18 +32,25 @@ describe('Login page', function () {
     it('http code should be success', function (done) {
 
         var options = {
-            host: 'localhost',
+            hostname: 'localhost',
             port: 3000,
             path: '/login',
+            agent: false,
             method: 'get'
         };
 
-        http.get(options, function (res) {
+        var req = http.request(options, function(res) {
             res.statusCode.should.equal(200);
-        }).on('error', function (e) {
-            errs.handle(e);
+            req.end();
+            done();
         });
-        done();
+        req.on('error', function (e) {
+            done(e);
+        });
+        req.on('end', function (e) {
+            done();
+        });
+        req.end();
     });
 });
 
@@ -44,18 +58,25 @@ describe('Add page', function () {
     it('should redirect to /login with code 302', function (done) {
 
         var options = {
-            host: 'localhost',
+            hostname: 'localhost',
             port: 3000,
             path: '/add',
+            agent: false,
             method: 'get'
         };
 
-        http.get(options, function (res) {
+        var req = http.request(options, function(res) {
             res.statusCode.should.equal(302);
-        }).on('error', function (e) {
-            errs.handle(e);
+            req.end();
+            done();
         });
-        done();
+        req.on('error', function (e) {
+            done(e);
+        });
+        req.on('end', function (e) {
+            done();
+        });
+        req.end();
     });
 });
 
@@ -63,18 +84,25 @@ describe('Stats page', function () {
     it('should redirect to /login with code 302', function (done) {
 
         var options = {
-            host: 'localhost',
+            hostname: 'localhost',
             port: 3000,
             path: '/stats',
+            agent: false,
             method: 'get'
         };
 
-        http.get(options, function (res) {
+        var req = http.request(options, function(res) {
             res.statusCode.should.equal(302);
-        }).on('error', function (e) {
-            errs.handle(e);
+            req.end();
+            done();
         });
-        done();
+        req.on('error', function (e) {
+            done(e);
+        });
+        req.on('end', function (e) {
+            done();
+        });
+        req.end();
     });
 });
 
@@ -82,39 +110,24 @@ describe('Cloud page', function () {
     it('should redirect to /login with code 302', function (done) {
 
         var options = {
-            host: 'localhost',
+            hostname: 'localhost',
             port: 3000,
             path: '/cloud',
+            agent: false,
             method: 'get'
         };
 
-        http.get(options, function (res) {
+        var req = http.request(options, function(res) {
             res.statusCode.should.equal(302);
-        }).on('error', function (e) {
-            errs.handle(e);
+            req.end();
+            done();
         });
-        done();
+        req.on('error', function (e) {
+            done(e);
+        });
+        req.on('end', function (e) {
+            done();
+        });
+        req.end();
     });
 });
-
-describe('Calendar page', function () {
-    it('should redirect to /login with code 302', function (done) {
-
-        var options = {
-            host: 'localhost',
-            port: 3000,
-            path: '/calendar',
-            method: 'get'
-        };
-
-        http.get(options, function (res) {
-            res.statusCode.should.equal(302);
-        }).on('error', function (e) {
-            errs.handle(e);
-        });
-        done();
-    });
-});
-
-
-

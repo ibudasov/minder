@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Q = require('q');
 var _ = require('lodash');
 var moment = require('moment');
-var fakeToken = 1234567890;
+var fakeToken = '1234567890';
 
 // @see: http://passportjs.org/docs/profile
 var UserSchema = new mongoose.Schema({

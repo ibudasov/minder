@@ -34,12 +34,12 @@ html
       br
       ul.nav.nav-pills.pull-right
         if req.user
-          li&attributes({'role':'presentation'})
-            a(href='stats')&attributes({'title':'Statistics about your thoughts'})
-              span.glyphicon.glyphicon-saved&attributes({'aria-hidden':'true'})
-          li&attributes({'role':'presentation'})
-            a(href='cloud')&attributes({'title':'All your thoughts'})
-              span.glyphicon.glyphicon-align-left&attributes({'aria-hidden':'true'})
+        li&attributes({'role':'presentation'})
+          a(href='stats')&attributes({'title':'Statistics about your thoughts'})
+            span.glyphicon.glyphicon-saved&attributes({'aria-hidden':'true'})
+        li&attributes({'role':'presentation'})
+          a(href='cloud')&attributes({'title':'All your thoughts'})
+            span.glyphicon.glyphicon-align-left&attributes({'aria-hidden':'true'})
         li&attributes({'role': 'presentation'})
           a(href='login')&attributes({'title':'Login or logout'})
             span.glyphicon.glyphicon-user&attributes({'aria-hidden': 'true'})
