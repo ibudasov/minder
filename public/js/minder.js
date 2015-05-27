@@ -103,10 +103,13 @@ minder = {
             }
         }).done(function (thoughts) {
             var maximumNumberOfThoughts = 0;
+
             if (thoughts.topThoughts.length > 0) {
                 $('#statsPage').html("");
+                $('div#statsPage').append($('<div class="progress"/>', {}));
+            } else {
+                return;
             }
-            $('div#statsPage').append($('<div class="progress"/>', {}));
 
             var sumOfAllThoughts = thoughts.topThoughts.map(function (thought) {
                 return thought.numberOfEntries;
@@ -118,15 +121,15 @@ minder = {
                     'progress-bar-danger',
                     'progress-bar-warning',
                     'progress-bar-success',
-                    'progress-bar-info',
-                    'progress-bar'
+                    'progress-bar',
+                    'progress-bar-info'
                 ],
                 colorsForBadges = [
                     'label-danger',
                     'label-warning',
                     'label-success',
-                    'label-info',
-                    'label-primary'
+                    'label-primary',
+                    'label-info'
                 ];
 
             thoughts.topThoughts.forEach(function (thought, i) {
