@@ -28,14 +28,12 @@ html
     script(rel='text/javascript', src='/js/bootstrap.js')
     script(rel='text/javascript', src='/js/minder.js')
   body
-    div.container-fluid.col-lg-offset-4.col-lg-3.col-md-offset-4.col-md-4.col-sm-offset-3.col-sm-5
+    div.pleaseShowMessagesHere.container-fluid.col-lg-offset-4.col-lg-3.col-md-offset-4.col-md-4.col-sm-offset-3.col-sm-5
       h2.pull-left
         a(href='/') Minder
       br
       ul.nav.nav-pills.pull-right
-        li&attributes({'role':'presentation'})
-          a(href='add')&attributes({'title':'Add new thought'})
-            span.glyphicon.glyphicon-plus&attributes({'aria-hidden':'true'})
+        if req.user
         li&attributes({'role':'presentation'})
           a(href='stats')&attributes({'title':'Statistics about your thoughts'})
             span.glyphicon.glyphicon-saved&attributes({'aria-hidden':'true'})
@@ -45,9 +43,9 @@ html
         li&attributes({'role': 'presentation'})
           a(href='login')&attributes({'title':'Login or logout'})
             span.glyphicon.glyphicon-user&attributes({'aria-hidden': 'true'})
-    hr
-  div.container
-      div.starter-template.col-lg-offset-4.col-lg-3.col-md-offset-4.col-md-4.col-sm-offset-3.col-sm-5
+    div.container-fluid.col-lg-offset-4.col-lg-3.col-md-offset-4.col-md-4.col-sm-offset-3.col-sm-5
+      div.starter-template
+        br
         block content
 
 
