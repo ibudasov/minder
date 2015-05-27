@@ -40,7 +40,7 @@ minder = {
     },
 
     hideLoader: function (parent) {
-        //$('.ajax-loader').remove();
+        $('.ajax-loader').remove();
     },
 
     getCloudOfThoughts: function () {
