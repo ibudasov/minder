@@ -35,10 +35,21 @@ minder = {
         }).appendTo('div.pleaseShowMessagesHere').fadeOut(2000);
     },
 
+    showLoader: function (parent) {
+        $('.pleaseShowLoaderHere').prepend($('<div/>', {class: 'ajax-loader bg-info text-center', text: 'Loading...'}));
+    },
+
+    hideLoader: function (parent) {
+        //$('.ajax-loader').remove();
+    },
+
     getCloudOfThoughts: function () {
         $.ajax({
             type: 'GET',
-            url: "/thought"
+            url: "/thought",
+            beforeSend: function () {
+                minder.showLoader();
+            }
         }).done(function (thoughts) {
             if (thoughts.list.length > 0) {
                 $('#cloudPage').html("");
@@ -51,6 +62,8 @@ minder = {
             });
         }).fail(function () {
             minder.showError('Can not get Cloud of Thoughts. Sorry.');
+        }).complete(function() {
+            minder.hideLoader();
         });
     },
 
@@ -65,12 +78,17 @@ minder = {
             $.ajax({
                 type: "POST",
                 url: "/thought",
-                data: {thought: thoughtToAdd}
+                data: {thought: thoughtToAdd},
+                beforeSend: function () {
+                    minder.showLoader();
+                }
             }).done(function (msg) {
                 minder.showNotice('Well done!');
                 minder.quickAdd();
             }).fail(function () {
                 minder.showError('Can not add tought. Sorry.');
+            }).complete(function() {
+                minder.hideLoader();
             });
             $('#thoughtInput').val("");
         });
@@ -79,7 +97,10 @@ minder = {
     renderStatsPage: function () {
         $.ajax({
             type: 'GET',
-            url: "/statistic/top"
+            url: "/statistic/top",
+            beforeSend: function () {
+                minder.showLoader();
+            }
         }).done(function (thoughts) {
             var maximumNumberOfThoughts = 0;
             if (thoughts.topThoughts.length > 0) {
@@ -128,13 +149,18 @@ minder = {
             });
         }).fail(function () {
             minder.showError('Can not get Stats. Sorry.');
+        }).complete(function() {
+            minder.hideLoader();
         });
     },
 
     quickAdd: function () {
         $.ajax({
             type: 'GET',
-            url: "/thought/distinct"
+            url: "/thought/distinct",
+            beforeSend: function () {
+                minder.showLoader();
+            }
         }).done(function (thoughts) {
             if (thoughts.list.length > 0) {
                 $('#quickAdd').html("");
@@ -148,6 +174,8 @@ minder = {
             minder.quickAddClickProcessor();
         }).fail(function () {
             minder.showError('Can not get quick thoughts. Sorry.');
+        }).complete(function() {
+            minder.hideLoader();
         });
     },
 
@@ -161,11 +189,16 @@ minder = {
             $.ajax({
                 type: "POST",
                 url: "/thought",
-                data: {thought: thoughtToAdd}
+                data: {thought: thoughtToAdd},
+                beforeSend: function () {
+                    minder.showLoader();
+                }
             }).done(function (msg) {
                 minder.showNotice('Well done!')
             }).fail(function () {
                 minder.showError('Can not add tought. Sorry.');
+            }).complete(function() {
+                minder.hideLoader();
             });
         });
     }
