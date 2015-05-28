@@ -32,7 +32,7 @@ You can get you local copy of project for developer purposes. Just repeat this s
 
 **endpoints** are shown in 
 
-![Alt text](https://dl.dropboxusercontent.com/u/929613/minder/Screenshot%202015-05-28%2012.22.37.png)
+![Alt text](https://dl.dropboxusercontent.com/u/929613/minder/Screenshot%202015-05-28%2012.49.09.png)
 
 
 **accessToken=1234567890** — will grants access as authorized user. Pass them in request's body in case of POST request, and in query in case of GET request. Make sure that in your database you have at least one user, because of this hack uses first found user. 
