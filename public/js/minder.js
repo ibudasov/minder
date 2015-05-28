@@ -36,11 +36,21 @@ minder = {
     },
 
     showLoader: function (parent) {
-        $('.pleaseShowLoaderHere').prepend($('<div/>', {class: 'ajax-loader bg-info text-center', text: 'Loading...'}));
+        $('.pleaseShowLoaderHere').prepend(
+            $('<div/>', {class: 'ajax-loader progress'})
+                .append($('<div/>', {
+                    class: 'progress-bar progress-bar-success progress-bar-striped active',
+                    'role': "progressbar",
+                    'aria-valuenow': "45",
+                    'aria-valuemin': "0",
+                    'aria-valuemax': "100",
+                    'style': "width: 100%"
+                }))
+        );
     },
 
     hideLoader: function (parent) {
-        $('.ajax-loader').remove();
+        $('.ajax-loader').slideUp().remove();
     },
 
     getCloudOfThoughts: function () {
@@ -62,7 +72,7 @@ minder = {
             });
         }).fail(function () {
             minder.showError('Can not get Cloud of Thoughts. Sorry.');
-        }).complete(function() {
+        }).complete(function () {
             minder.hideLoader();
         });
     },
@@ -87,7 +97,7 @@ minder = {
                 minder.quickAdd();
             }).fail(function () {
                 minder.showError('Can not add tought. Sorry.');
-            }).complete(function() {
+            }).complete(function () {
                 minder.hideLoader();
             });
             $('#thoughtInput').val("");
@@ -152,7 +162,7 @@ minder = {
             });
         }).fail(function () {
             minder.showError('Can not get Stats. Sorry.');
-        }).complete(function() {
+        }).complete(function () {
             minder.hideLoader();
         });
     },
@@ -177,7 +187,7 @@ minder = {
             minder.quickAddClickProcessor();
         }).fail(function () {
             minder.showError('Can not get quick thoughts. Sorry.');
-        }).complete(function() {
+        }).complete(function () {
             minder.hideLoader();
         });
     },
@@ -200,7 +210,7 @@ minder = {
                 minder.showNotice('Well done!')
             }).fail(function () {
                 minder.showError('Can not add tought. Sorry.');
-            }).complete(function() {
+            }).complete(function () {
                 minder.hideLoader();
             });
         });
