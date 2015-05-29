@@ -3,7 +3,7 @@ var http = require('http');
 var fakeToken = 1234567890;
 
 describe('API GET /statistic/top', function () {
-    it('anonymous http code should be 401', function (done) {
+    it('ANON: 401 Unauthorized', function (done) {
 
         var options = {
             port: 3000,
@@ -24,7 +24,7 @@ describe('API GET /statistic/top', function () {
         req.end();
     });
 
-    it('authentificated http response should have .topThoughts array', function (done) {
+    it('AUTH: 200 OK: {"topThoughts":[{"_id":"mocha","numberOfEntries":46},{"_id":"photo","numberOfEntries":9}]}', function (done) {
 
         var options = {
             hostname: '127.0.0.1',
@@ -53,7 +53,7 @@ describe('API GET /statistic/top', function () {
 });
 
 describe('API GET /statistic/top/5', function () {
-    it('anonymous http code should be 401', function (done) {
+    it('ANON: 401 Unauthorized', function (done) {
 
         var options = {
             hostname: '127.0.0.1',
@@ -74,7 +74,7 @@ describe('API GET /statistic/top/5', function () {
         req.end();
     });
 
-    it('authentificated http response should have .topThoughts array', function (done) {
+    it('AUTH: 200 OK: {"topThoughts":[{"_id":"mocha","numberOfEntries":46},{"_id":"photo","numberOfEntries":9}]}', function (done) {
 
         var options = {
             hostname: '127.0.0.1',
@@ -101,7 +101,7 @@ describe('API GET /statistic/top/5', function () {
         req.end();
     });
 
-    it('authentificated http response should have 5 elements in .topThoughts array', function (done) {
+    it('AUTH: 200 OK: {"topThoughts":[{},{}]} -- .topThoughts.length.should.not.be.above(5)', function (done) {
 
         var options = {
             hostname: '127.0.0.1',

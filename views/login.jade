@@ -5,17 +5,13 @@ block content
     div.panel.panel-primary
         div.panel-heading
             h3.panel-title Authentification
-        div.panel-body.text-center
+        div.panel-body.text-center.login-buttons
             br
             if !loggedIn
-                button.btn.btn-default&attributes({'type': 'button'})
-                    a(href='auth/facebook')
-                        span.glyphicon.glyphicon-thumbs-up&attributes({'aria-hidden': 'true'})  Facebook
-                br
-                br
-                button.btn.btn-default&attributes({'type': 'button'})
-                    a(href='auth/google')
-                        span.glyphicon.glyphicon-envelope&attributes({'aria-hidden': 'true'})  Google
+                a(href='auth/facebook')
+                    img(src='/images/facebook-32.png')
+                a(href='auth/google')
+                    img(src='/images/google-32.png')
             else
                 button.btn.btn-default&attributes({'type': 'button'})
                     a(href='logout')

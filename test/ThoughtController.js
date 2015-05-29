@@ -4,7 +4,7 @@ var querystring = require('querystring');
 var fakeToken = 1234567890;
 
 describe('API POST /thought', function () {
-    it('anonymous http code should be 401', function (done) {
+    it('ANON: 401 Unauthorized', function (done) {
 
         var options = {
             hostname: '127.0.0.1',
@@ -26,7 +26,7 @@ describe('API POST /thought', function () {
 
     });
 
-    it('authentificated create new thought, status 200', function (done) {
+    it('AUTH: 200 OK: {"added":"photo"}', function (done) {
 
         var postData = querystring.stringify({
             'thought' : 'mocha'
@@ -60,7 +60,7 @@ describe('API POST /thought', function () {
 });
 
 describe('API GET /thought', function () {
-    it('anonymous  http code should be 401', function (done) {
+    it('ANON: 401 Unauthorized', function (done) {
 
         var options = {
             hostname: '127.0.0.1',
@@ -80,7 +80,7 @@ describe('API GET /thought', function () {
         req.end();
     });
 
-    it('authentificated http code should be 200', function (done) {
+    it('AUTH: 200 OK', function (done) {
 
         var options = {
             hostname: '127.0.0.1',
@@ -100,7 +100,7 @@ describe('API GET /thought', function () {
         req.end();
     });
 
-    it('authentificated http response should have .list array', function (done) {
+    it('AUTH: 200 OK: {"list":["photo","mocha","photo"]}', function (done) {
 
         var options = {
             hostname: '127.0.0.1',
@@ -129,7 +129,7 @@ describe('API GET /thought', function () {
 });
 
 describe('API GET /thought/distinct', function () {
-    it('anonymous http code should be 401', function (done) {
+    it('ANON: 401 Unauthorized', function (done) {
 
         var options = {
             hostname: '127.0.0.1',
@@ -149,7 +149,7 @@ describe('API GET /thought/distinct', function () {
         req.end();
     });
 
-    it('authentificated http response should have .list array', function (done) {
+    it('AUTH: 200 OK: {"list":["photo","mocha"]}', function (done) {
 
         var options = {
             hostname: '127.0.0.1',
