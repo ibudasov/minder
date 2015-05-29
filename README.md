@@ -24,6 +24,18 @@ You can get you local copy of project for developer purposes. Just repeat this s
 
 **http://localhost:3000** — open in browser
 
+### Load testing
+
+**npm install -g loadtest** — install load testing tool
+
+**loadtest -c 10 --rps 20 http://localhost:3000/** — run tests
+
+**loadtest** — run command without params to see help
+
+**loadtest -c 1 --rps 260 http://localhost:3000/thought?accessToken=1234567890**
+
+**loadtest -c 1 --rps 310 http://localhost:3000/statistic/top/5?accessToken=1234567890**
+
 ### API testing
 
 **mongod** — run in separate console tab. Mongo shoul be up and runnibg.
