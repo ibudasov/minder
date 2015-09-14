@@ -1,6 +1,7 @@
 module.exports = {
     "ENV": 'dev',
     "MONGO_DB": "mongodb://localhost/minder",
+    "REDIS": "redis://127.0.0.1:6379/",
 
     "FB_CLIENT_SECRET": "85481029caf17f07d5e445b1ff123d87",
     "FB_CLIENT_ID": "1077973092230207",
