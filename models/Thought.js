@@ -2,9 +2,6 @@ var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var Q = require('q');
 var moment = require('moment');
-var Redis = require("ioredis");
-var config = require('config');
-var redisClient = new Redis(config.get("REDIS"));
 
 var ThoughtSchema = new mongoose.Schema({
     userId: ObjectId,
