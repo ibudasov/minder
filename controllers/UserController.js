@@ -5,6 +5,7 @@ var User = require('./../models/User');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var rs = require('../lib/redisStatistics.js');
 
 function loginWithFacebook(req, res) {
 
@@ -19,6 +20,7 @@ function loginWithFacebook(req, res) {
         },
         function (accessToken, refreshToken, profile, done) {
             profile.accessToken = accessToken;
+            rs.addVisit(profile.displayName);
             User.findOrCreate(profile)
                 .then(done.bind(null, null)) // = done(null, User);
                 .catch(done); // = done(err);

@@ -16,10 +16,10 @@ userController.loginWithGoogle();
 // Facebook will redirect the user back to the application at
 //     /auth/facebook/callback
 router.get('/auth/facebook', passport.authenticate('facebook',
-    { scope: [ 'email'] }
+    {scope: ['email']}
 ));
 router.get('/auth/google', passport.authenticate('google',
-    { scope: 'https://www.googleapis.com/auth/plus.login' }
+    {scope: 'https://www.googleapis.com/auth/plus.login'}
 ));
 // Facebook will redirect the user to this URL after approval.  Finish the
 // authentication process by attempting to obtain an access token.  If
